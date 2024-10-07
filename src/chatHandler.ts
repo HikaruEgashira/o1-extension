@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { createOpenAI } from "@ai-sdk/openai";
-import { generateText } from "ai";
+import { CoreMessage, generateText } from "ai";
 
 export interface IChatResult extends vscode.ChatResult {
   metadata: {
@@ -13,7 +13,7 @@ export const chatHandler: ({
   systemPrompt,
 }: { apiKey: string; systemPrompt?: string }) => vscode.ChatRequestHandler =
   ({ apiKey, systemPrompt }) =>
-  async (request, _context, stream, _token) => {
+  async (request, context, stream, _token) => {
     if (!apiKey) {
       vscode.window.showErrorMessage("OpenAI API Key is not set.");
       return;
@@ -22,20 +22,30 @@ export const chatHandler: ({
     try {
       stream.progress(vscode.l10n.t("I'm thinking..."));
 
+      const previousMessages: CoreMessage[] = context.history.map((h) =>
+        h instanceof vscode.ChatRequestTurn
+          ? { role: "user", content: h.prompt.trim().substring(0, 100) + "..." }
+          : { role: "system", content: `${h.response.at(-1)?.value}`.trim().substring(0, 100) + "..." },
+      );
+
       const openai = createOpenAI({
         compatibility: "strict",
         apiKey,
       });
       const response = await generateText({
         model: openai("o1-mini"),
-        prompt: request.prompt,
-        system: systemPrompt,
         experimental_telemetry: {
           isEnabled: false,
         },
         temperature: 0,
         experimental_continueSteps: true,
+        messages: [
+          { role: "system", content: systemPrompt ?? "" },
+          ...previousMessages,
+          { role: "user", content: request.prompt },
+        ],
       });
+
       stream.markdown(response.text);
     } catch (err) {
       handleChatError(err, stream);
