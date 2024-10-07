@@ -10,8 +10,7 @@
   "engines": {
     "vscode": "^1.93.0"
   },
-  "icon": "openai.svg",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "extensionDependencies": [
     "github.copilot-chat"
   ],

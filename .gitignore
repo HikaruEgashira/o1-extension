@@ -1,5 +1,6 @@
 out
 dist
+pkg
 
 # General
 .DS_Store
