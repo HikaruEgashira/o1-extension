@@ -4,7 +4,7 @@ import { chatHandler } from "./chatHandler";
 
 export async function activate(context: vscode.ExtensionContext) {
   const apiKey = await getApiKey(context);
-  const o1 = vscode.chat.createChatParticipant("vscode-copilot.o1", chatHandler(apiKey));
+  const o1 = vscode.chat.createChatParticipant("vscode-copilot.o1-mini", chatHandler(apiKey));
   o1.iconPath = vscode.Uri.joinPath(context.extensionUri, "o1-mini.webp");
 }
 
