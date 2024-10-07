@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { createOpenAI } from "@ai-sdk/openai";
-import { CoreMessage, generateText } from "ai";
+import { type CoreMessage, generateText } from "ai";
 
 export interface IChatResult extends vscode.ChatResult {
   metadata: {
