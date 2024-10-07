@@ -24,8 +24,8 @@ export const chatHandler: ({
 
       const previousMessages: CoreMessage[] = context.history.map((h) =>
         h instanceof vscode.ChatRequestTurn
-          ? { role: "user", content: h.prompt.trim().substring(0, 100) + "..." }
-          : { role: "system", content: `${h.response.at(-1)?.value}`.trim().substring(0, 100) + "..." },
+          ? { role: "user", content: h.prompt.substring(0, 100) + "..." }
+          : { role: "assistant", content: `${h.response.at(-1)?.value}`.substring(0, 100) + "..." },
       );
 
       const openai = createOpenAI({
@@ -40,7 +40,7 @@ export const chatHandler: ({
         temperature: 0,
         experimental_continueSteps: true,
         messages: [
-          { role: "system", content: systemPrompt ?? "" },
+          { role: "assistant", content: systemPrompt ?? "" },
           ...previousMessages,
           { role: "user", content: request.prompt },
         ],
