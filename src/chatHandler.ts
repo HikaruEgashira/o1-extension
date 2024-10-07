@@ -38,7 +38,6 @@ export const chatHandler: ({
           isEnabled: false,
         },
         temperature: 0,
-        experimental_continueSteps: true,
         messages: [
           { role: "assistant", content: systemPrompt ?? "" },
           ...previousMessages,
