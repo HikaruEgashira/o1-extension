@@ -1,16 +1,16 @@
 {
-  "name": "vscode-translate-agent",
+  "name": "vscode-o1-agent",
   "publisher": "hikaruegashira",
-  "displayName": "Translate Agent (Copilot Chat Participant)",
-  "description": "This extension provides a chat participant that allows you to translate.",
+  "displayName": "Use OpenAI API (o1-mini model) (Copilot Chat Participant)",
+  "description": "This extension provides a chat participant that allows you to use the OpenAI API (o1-mini model) in Copilot Chat.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HikaruEgashira/translator-extension.git"
+    "url": "https://github.com/HikaruEgashira/o1-extension.git"
   },
   "engines": {
     "vscode": "^1.93.0"
   },
-  "icon": "bot.webp",
+  "icon": "openai.svg",
   "version": "1.0.2",
   "extensionDependencies": [
     "github.copilot-chat"
@@ -22,10 +22,10 @@
   "contributes": {
     "chatParticipants": [
       {
-        "id": "vscode-copilot.translate",
-        "fullName": "translator",
-        "name": "translator",
-        "description": "translate given prompt",
+        "id": "vscode-copilot.o1",
+        "fullName": "o1",
+        "name": "o1",
+        "description": "o1 given prompt",
         "isSticky": true
       }
     ]
@@ -34,7 +34,7 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "publish": "bunx vsce publish",
-    "unpublish": "bunx vsce unpublish hikaruegashira.vscode-translate-agent",
+    "unpublish": "bunx vsce unpublish hikaruegashira.vscode-o1-agent",
     "patch": "bunx vsce publish patch",
     "minor": "bunx vsce publish minor",
     "major": "bunx vsce publish major",
@@ -54,5 +54,9 @@
     "@vscode/prompt-tsx": "^0.2.11-alpha",
     "typescript": "^5.5.3",
     "vite": "^5.3.3"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^0.0.66",
+    "ai": "^3.4.9"
   }
 }
