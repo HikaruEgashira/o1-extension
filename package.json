@@ -1,8 +1,8 @@
 {
-  "name": "vscode-o1-agent",
+  "name": "vscode-o1-mini-agent",
   "publisher": "hikaruegashira",
-  "displayName": "Use OpenAI API (o1-mini model) (Copilot Chat Participant)",
-  "description": "This extension provides a chat participant that allows you to use the OpenAI API (o1-mini model) in Copilot Chat.",
+  "displayName": "Invoke o1-mini model via OpenAI API. (Copilot Chat Participant)",
+  "description": "This extension provides a chat participant that allows you to invoke the o1-mini model via the OpenAI API.",
   "repository": {
     "type": "git",
     "url": "https://github.com/HikaruEgashira/o1-extension.git"
@@ -17,14 +17,15 @@
   "categories": [
     "Other"
   ],
+  "icon": "o1-mini.webp",
   "activationEvents": [],
   "contributes": {
     "chatParticipants": [
       {
-        "id": "vscode-copilot.o1",
-        "fullName": "o1",
-        "name": "o1",
-        "description": "o1 given prompt",
+        "id": "vscode-copilot.o1-mini",
+        "fullName": "o1-mini",
+        "name": "o1-mini",
+        "description": "Invoke o1-mini model via OpenAI API.",
         "isSticky": true
       }
     ]
