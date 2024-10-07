@@ -20,6 +20,17 @@
   "icon": "o1-mini.webp",
   "activationEvents": [],
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "o1-mini Configuration",
+      "properties": {
+        "o1-mini.systemPrompt": {
+          "type": "string",
+          "default": "",
+          "description": "System prompt for the o1-mini model."
+        }
+      }
+    },
     "chatParticipants": [
       {
         "id": "vscode-copilot.o1-mini",

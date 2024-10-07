@@ -8,8 +8,12 @@ export interface IChatResult extends vscode.ChatResult {
   };
 }
 
-export const chatHandler: (apiKey: string) => vscode.ChatRequestHandler =
-  (apiKey) => async (request, _context, stream, _token) => {
+export const chatHandler: ({
+  apiKey,
+  systemPrompt,
+}: { apiKey: string; systemPrompt?: string }) => vscode.ChatRequestHandler =
+  ({ apiKey, systemPrompt }) =>
+  async (request, _context, stream, _token) => {
     if (!apiKey) {
       vscode.window.showErrorMessage("OpenAI API Key is not set.");
       return;
@@ -24,10 +28,13 @@ export const chatHandler: (apiKey: string) => vscode.ChatRequestHandler =
       });
       const response = await generateText({
         model: openai("o1-mini"),
+        prompt: request.prompt,
+        system: systemPrompt,
         experimental_telemetry: {
           isEnabled: false,
         },
-        prompt: request.prompt,
+        temperature: 0,
+        experimental_continueSteps: true,
       });
       stream.markdown(response.text);
     } catch (err) {
