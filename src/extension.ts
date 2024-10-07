@@ -2,15 +2,23 @@ import * as vscode from "vscode";
 
 import { chatHandler } from "./chatHandler";
 
+const apiKeyKey = "openaiApiKey";
+
 export async function activate(context: vscode.ExtensionContext) {
   const apiKey = await getApiKey(context);
   const systemPrompt = vscode.workspace.getConfiguration("o1-mini").get<string>("systemPrompt");
   const o1 = vscode.chat.createChatParticipant("vscode-copilot.o1-mini", chatHandler({ apiKey, systemPrompt }));
   o1.iconPath = vscode.Uri.joinPath(context.extensionUri, "o1-mini.webp");
+
+  const command = "o1-mini.reset";
+  async function commandHanndler() {
+    await context.secrets.delete(apiKeyKey);
+    await getApiKey(context);
+  }
+  context.subscriptions.push(vscode.commands.registerCommand(command, commandHanndler));
 }
 
 async function getApiKey(context: vscode.ExtensionContext): Promise<string> {
-  const apiKeyKey = "openaiApiKey";
   const apiKey = await context.secrets.get(apiKeyKey);
   if (apiKey) {
     return apiKey;
@@ -25,4 +33,6 @@ async function getApiKey(context: vscode.ExtensionContext): Promise<string> {
   return await getApiKey(context);
 }
 
-export function deactivate() {}
+export function deactivate(context: vscode.ExtensionContext) {
+  context.secrets.delete(apiKeyKey);
+}

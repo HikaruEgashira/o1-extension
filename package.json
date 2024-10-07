@@ -24,20 +24,26 @@
       "type": "object",
       "title": "o1-mini Configuration",
       "properties": {
-        "o1-mini.systemPrompt": {
-          "type": "string",
-          "default": "",
-          "description": "System prompt for the o1-mini model."
-        }
+      "o1-mini.systemPrompt": {
+        "type": "string",
+        "default": "",
+        "description": "System prompt for the o1-mini model."
+      }
       }
     },
     "chatParticipants": [
       {
-        "id": "vscode-copilot.o1-mini",
-        "fullName": "o1-mini",
-        "name": "o1-mini",
-        "description": "Invoke o1-mini model via OpenAI API.",
-        "isSticky": true
+      "id": "vscode-copilot.o1-mini",
+      "fullName": "o1-mini",
+      "name": "o1-mini",
+      "description": "Invoke o1-mini model via OpenAI API.",
+      "isSticky": true
+      }
+    ],
+    "commands": [
+      {
+        "command": "o1-mini.reset",
+        "title": "Reset API Token for o1-mini Agent"
       }
     ]
   },
