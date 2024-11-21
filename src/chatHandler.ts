@@ -1,12 +1,6 @@
-import * as vscode from "vscode";
 import { createOpenAI } from "@ai-sdk/openai";
 import { type CoreMessage, generateText } from "ai";
-
-export interface IChatResult extends vscode.ChatResult {
-  metadata: {
-    command: string;
-  };
-}
+import * as vscode from "vscode";
 
 export const chatHandler: ({
   apiKey,
@@ -61,7 +55,7 @@ function handleChatError(err: unknown, stream: vscode.ChatResponseStream): void 
   if (err instanceof vscode.LanguageModelError) {
     console.error(err.message, err.code, err.cause);
     if (err.cause instanceof Error) {
-      stream.markdown(vscode.l10n.t("I'm sorry, I cannot o1 your text."));
+      stream.markdown(vscode.l10n.t("I'm sorry, I cannot process your text."));
     }
   } else {
     // re-throw other errors so they show up in the UI
