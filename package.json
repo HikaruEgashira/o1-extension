@@ -10,7 +10,7 @@
   "engines": {
     "vscode": "^1.93.0"
   },
-  "version": "1.0.2",
+  "version": "1.0.3",
   "extensionDependencies": [
     "github.copilot-chat"
   ],
@@ -37,7 +37,18 @@
       "fullName": "o1-mini",
       "name": "o1-mini",
       "description": "Invoke o1-mini model via OpenAI API.",
-      "isSticky": true
+      "isSticky": true,
+      "disambiguation": [
+        {
+          "category": "general_questions",
+          "description": "The user has general questions that may not be strictly related to programming.",
+          "examples": [
+            "What is the capital of France?",
+            "How do I bake a cake?",
+            "Can you tell me a joke?"
+          ]
+        }
+      ]
       }
     ],
     "commands": [
