@@ -8,7 +8,7 @@
     "url": "https://github.com/HikaruEgashira/o1-extension.git"
   },
   "engines": {
-    "vscode": "^1.93.0"
+    "vscode": "^1.96.0"
   },
   "version": "1.0.5",
   "extensionDependencies": [
