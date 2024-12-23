@@ -10,7 +10,7 @@
   "engines": {
     "vscode": "^1.93.0"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "extensionDependencies": [
     "github.copilot-chat"
   ],
@@ -24,31 +24,31 @@
       "type": "object",
       "title": "o1-mini Configuration",
       "properties": {
-      "o1-mini.systemPrompt": {
-        "type": "string",
-        "default": "",
-        "description": "System prompt for the o1-mini model."
-      }
+        "o1-mini.systemPrompt": {
+          "type": "string",
+          "default": "",
+          "description": "System prompt for the o1-mini model."
+        }
       }
     },
     "chatParticipants": [
       {
-      "id": "vscode-copilot.o1-mini",
-      "fullName": "o1-mini",
-      "name": "o1-mini",
-      "description": "Invoke o1-mini model via OpenAI API.",
-      "isSticky": true,
-      "disambiguation": [
-        {
-          "category": "general_questions",
-          "description": "The user has general questions that may not be strictly related to programming.",
-          "examples": [
-            "What is the capital of France?",
-            "How do I bake a cake?",
-            "Can you tell me a joke?"
-          ]
-        }
-      ]
+        "id": "vscode-copilot.o1-mini",
+        "fullName": "o1-mini",
+        "name": "o1-mini",
+        "description": "Invoke o1-mini model via OpenAI API.",
+        "isSticky": true,
+        "disambiguation": [
+          {
+            "category": "general_questions",
+            "description": "The user has general questions that may not be strictly related to programming.",
+            "examples": [
+              "What is the capital of France?",
+              "How do I bake a cake?",
+              "Can you tell me a joke?"
+            ]
+          }
+        ]
       }
     ],
     "commands": [
