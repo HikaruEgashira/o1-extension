@@ -1,5 +1,5 @@
 {
-  "name": "vscode-o1-agent",
+  "name": "vscode-o1-mini-agent",
   "publisher": "hikaruegashira",
   "displayName": "o1 (OpenAI API) in Copilot Chat",
   "description": "Invoke o1 model via OpenAI API. (Copilot Chat Participant)",
