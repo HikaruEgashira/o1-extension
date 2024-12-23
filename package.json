@@ -75,16 +75,16 @@
     "package": "bunx vsce package"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.3",
-    "@langchain/community": "^0.3.4",
-    "@types/node": "^20.14.9",
-    "@types/vscode": "1.93.0",
+    "@biomejs/biome": "^1.9.4",
+    "@langchain/community": "^0.3.19",
+    "@types/node": "^22.10.2",
+    "@types/vscode": "1.96.0",
     "@vscode/prompt-tsx": "^0.2.11-alpha",
-    "typescript": "^5.5.3",
-    "vite": "^5.3.3"
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^0.0.66",
-    "ai": "^3.4.9"
+    "@ai-sdk/openai": "^1.0.11",
+    "ai": "^4.0.22"
   }
 }
