@@ -57,7 +57,7 @@ const buildMessage = async (
     request: vscode.ChatRequest,
     context: vscode.ChatContext
 ): Promise<CoreMessage[]> => {
-    const systemPrompt = vscode.workspace.getConfiguration("o1-mini").get<string>("systemPrompt")
+    const systemPrompt = vscode.workspace.getConfiguration("o1").get<string>("systemPrompt")
     const previousMessages: CoreMessage[] = context.history.map((h) =>
         h instanceof vscode.ChatRequestTurn
             ? { role: "user", content: h.prompt.substring(0, 100) + "..." }
@@ -94,6 +94,7 @@ type InvakeOpenAI = {
     request: vscode.ChatRequest;
     context: vscode.ChatContext;
     stream: vscode.ChatResponseStream;
+    model: string;
 }
 
 export const invokeOpenAI = async ({
@@ -101,6 +102,7 @@ export const invokeOpenAI = async ({
     request,
     context,
     stream,
+    model,
 }: InvakeOpenAI) => {
     const messages = await buildMessage(request, context)
 
@@ -109,17 +111,19 @@ export const invokeOpenAI = async ({
         apiKey,
     });
     const { textStream } = streamText({
-        model: openai("o1-mini"),
+        model: openai(model),
         experimental_telemetry: {
             isEnabled: false,
         },
         temperature: 0,
         messages,
-        experimental_providerMetadata: {
-            openai: {
-                reasoningEffort: 'high',
+        ...(model === "o1" && {
+            experimental_providerMetadata: {
+                openai: {
+                    reasoningEffort: 'high',
+                },
             },
-        },
+        }),
     });
 
     for await (const textPart of textStream) {

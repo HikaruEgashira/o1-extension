@@ -1,6 +1,7 @@
-# o1 in VSCode
+# OpenAI API in VSCode Copilot Chat
 
-- @o1 を使うことでOpenAIのo1-miniモデルを用いて応答することができるようになります。
+- @o1 ... model: o1 with reasoning_effort: "high"
+- @o1-mini ... model: o1-mini
 
 <img src="./screenshot.png" alt="screenshot" width="300" />
 

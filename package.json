@@ -1,8 +1,8 @@
 {
-  "name": "vscode-o1-mini-agent",
+  "name": "vscode-o1-agent",
   "publisher": "hikaruegashira",
-  "displayName": "o1-mini (OpenAI API) in Copilot Chat",
-  "description": "Invoke o1-mini model via OpenAI API. (Copilot Chat Participant)",
+  "displayName": "o1 (OpenAI API) in Copilot Chat",
+  "description": "Invoke o1 model via OpenAI API. (Copilot Chat Participant)",
   "repository": {
     "type": "git",
     "url": "https://github.com/HikaruEgashira/o1-extension.git"
@@ -10,24 +10,24 @@
   "engines": {
     "vscode": "^1.96.0"
   },
-  "version": "1.0.5",
+  "version": "1.0.6",
   "extensionDependencies": [
     "github.copilot-chat"
   ],
   "categories": [
     "Other"
   ],
-  "icon": "o1-mini.webp",
+  "icon": "o1.webp",
   "activationEvents": [],
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "o1-mini Configuration",
+      "title": "o1 Configuration",
       "properties": {
-        "o1-mini.systemPrompt": {
+        "o1.systemPrompt": {
           "type": "string",
           "default": "",
-          "description": "System prompt for the o1-mini model."
+          "description": "System prompt for the o1 model."
         }
       }
     },
@@ -49,12 +49,30 @@
             ]
           }
         ]
+      },
+      {
+        "id": "vscode-copilot.o1",
+        "fullName": "o1",
+        "name": "o1",
+        "description": "Invoke o1 model via OpenAI API.",
+        "isSticky": true,
+        "disambiguation": [
+          {
+            "category": "general_questions",
+            "description": "The user has general questions that may not be strictly related to programming.",
+            "examples": [
+              "What is the capital of France?",
+              "How do I bake a cake?",
+              "Can you tell me a joke?"
+            ]
+          }
+        ]
       }
     ],
     "commands": [
       {
-        "command": "o1-mini.reset",
-        "title": "Reset API Token for o1-mini Agent"
+        "command": "o1.reset",
+        "title": "Reset API Token for o1 Agent"
       }
     ]
   },
