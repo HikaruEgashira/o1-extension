@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { createOpenAI } from "@ai-sdk/openai";
-import { CoreMessage, generateText } from "ai";
+import { CoreMessage, streamText } from "ai";
 
 const getText = async (value: vscode.Location) => {
     const document = await vscode.workspace.openTextDocument(value.uri)
@@ -93,12 +93,14 @@ type InvakeOpenAI = {
     systemPrompt?: string;
     request: vscode.ChatRequest;
     context: vscode.ChatContext;
+    stream: vscode.ChatResponseStream;
 }
 
 export const invokeOpenAI = async ({
     apiKey,
     request,
     context,
+    stream,
 }: InvakeOpenAI) => {
     const messages = await buildMessage(request, context)
 
@@ -106,14 +108,34 @@ export const invokeOpenAI = async ({
         compatibility: "strict",
         apiKey,
     });
-    const response = await generateText({
+    const { textStream } = streamText({
         model: openai("o1-mini"),
         experimental_telemetry: {
             isEnabled: false,
         },
         temperature: 0,
         messages,
+        experimental_providerMetadata: {
+            openai: {
+                reasoningEffort: 'high',
+            },
+        },
     });
 
-    return response;
+    for await (const textPart of textStream) {
+        stream.markdown(textPart);
+    }
+}
+
+
+export const handleChatError = (err: unknown, stream: vscode.ChatResponseStream) => {
+    if (err instanceof vscode.LanguageModelError) {
+        console.error(err.message, err.code, err.cause);
+        if (err.cause instanceof Error) {
+            stream.markdown(vscode.l10n.t("I'm sorry, I cannot process your text."));
+        }
+    } else {
+        // re-throw other errors so they show up in the UI
+        throw err;
+    }
 }
