@@ -10,7 +10,7 @@
   "engines": {
     "vscode": "^1.96.0"
   },
-  "version": "1.0.6",
+  "version": "1.0.7",
   "extensionDependencies": [
     "github.copilot-chat"
   ],
@@ -28,6 +28,17 @@
           "type": "string",
           "default": "",
           "description": "System prompt for the o1 model."
+        },
+        "o1.reasoningEffort": {
+          "type": "string",
+          "default": "",
+          "enum": [
+            "",
+            "low",
+            "medium",
+            "high"
+          ],
+          "description": "The amount of effort the model should put into its reasoning."
         }
       }
     },

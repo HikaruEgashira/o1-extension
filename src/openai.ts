@@ -105,6 +105,7 @@ export const invokeOpenAI = async ({
     model,
 }: InvakeOpenAI) => {
     const messages = await buildMessage(request, context)
+    const reasoningEffort = vscode.workspace.getConfiguration("o1").get<string>("reasoningEffort")
 
     const openai = createOpenAI({
         compatibility: "strict",
@@ -117,13 +118,11 @@ export const invokeOpenAI = async ({
         },
         temperature: 0,
         messages,
-        ...(model === "o1" && {
-            experimental_providerMetadata: {
-                openai: {
-                    reasoningEffort: 'high',
-                },
+        experimental_providerMetadata: {
+            openai: {
+                ...(reasoningEffort && { reasoningEffort: 'high' }),
             },
-        }),
+        },
     });
 
     for await (const textPart of textStream) {
