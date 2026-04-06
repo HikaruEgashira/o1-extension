@@ -108,12 +108,11 @@ export const invokeOpenAI = async ({
     const reasoningEffort = vscode.workspace.getConfiguration("o1").get<string>("reasoningEffort")
 
     const openai = createOpenAI({
-        compatibility: "strict",
         apiKey,
     });
     const { textStream } = streamText({
         model: openai(model),
-        telemetry: {
+        experimental_telemetry: {
             isEnabled: false,
         },
         temperature: 0,
