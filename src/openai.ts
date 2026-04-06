@@ -113,12 +113,12 @@ export const invokeOpenAI = async ({
     });
     const { textStream } = streamText({
         model: openai(model),
-        experimental_telemetry: {
+        telemetry: {
             isEnabled: false,
         },
         temperature: 0,
         messages,
-        experimental_providerMetadata: {
+        providerOptions: {
             openai: {
                 ...(reasoningEffort && { reasoningEffort: 'high' }),
             },
