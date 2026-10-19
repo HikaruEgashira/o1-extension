@@ -15,7 +15,7 @@ jobs:
           bun-version: latest
       - name: Build
         run: |
-          bun install
+          bun install --frozen-lockfile
           bunx vsce package
       - name: Get version from package.json
         id: get_version
